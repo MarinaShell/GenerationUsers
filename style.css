@@ -1,0 +1,31 @@
+.game-card {
+    height: 100vh;
+    font-family: 'Open Sans', monospace;
+}
+.card-header{
+    color: rgb(20, 20, 54);
+    background-color: rgb(125, 158, 248);
+    font-size: 20px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
+
+.card-body{
+    color: black;
+    background-color: rgb(193, 221, 252);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
+
+.button{
+    background-color: rgb(24, 64, 138);
+    color: white;
+    border-radius: 5px;
+    width: 100px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}
+
+.cl_profession{
+    color: rgb(0, 61, 102);
+    font-size: 20px;
+    font-style: italic;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+}

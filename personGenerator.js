@@ -1,6 +1,6 @@
 const personGenerator = {
     surnameJson: `{  
-        "count": 15,
+        "count": 16,
         "list": {
             "id_1": "Иванов",
             "id_2": "Смирнов",
@@ -69,6 +69,39 @@ const personGenerator = {
         }
     }`,
 
+    professionJsonCommon: `{
+        "count": 5,
+        "list": {     
+            "id_1": "Доктор",
+            "id_2": "Повар",
+            "id_3": "Инженер",
+            "id_4": "Учитель",
+            "id_5": "Бухгалтер"
+        }
+    }`,
+
+    professionJsonMale: `{
+        "count": 5,
+        "list": {     
+            "id_1": "Строитель",
+            "id_2": "Слесарь",
+            "id_3": "Шахтер",
+            "id_4": "Фрезеровщик",
+            "id_5": "Солдат"
+        }
+    }`,
+
+    professionJsonFemale: `{
+        "count": 5,
+        "list": {     
+            "id_1": "Швея",
+            "id_2": "Домохозяйка",
+            "id_3": "Медсестра",
+            "id_4": "Няня",
+            "id_5": "Стюардесса"
+        }
+    }`,
+
     GENDER_MALE: 'Мужчина',
     GENDER_FEMALE: 'Женщина',
 
@@ -89,6 +122,25 @@ const personGenerator = {
     /*генерация года рождения*/
     randomBirthYear: function() {
         return this.randomIntNumber(1920, 2000);
+    },
+
+    /*генерация месяца рождения*/
+    randomBirthMonthDay: function() {
+        let numMonth = this.randomIntNumber(1, 12);
+        let arr_month = [["января", 31], 
+                         ["февраля", 28],
+                         ["марта", 31],
+                         ["апреля", 30],
+                         ["мая", 31],
+                         ["июня", 30],
+                         ["июля", 31],
+                         ["августа", 31], 
+                         ["сентября",30],
+                         ["октября", 31],
+                         ["ноября", 30],
+                         ["декабря", 31]];
+        let numDay = this.randomIntNumber(1, arr_month[numMonth-1][1]);                 
+        return numDay + " " + arr_month[numMonth-1][0]; 
     },
 
     /*генерация имени в зависимости от пола*/
@@ -120,13 +172,30 @@ const personGenerator = {
         return surname_tmp;
     },
 
+    
+    /*генерация профессии в зависимости от пола*/
+    randomProfession: function(gender) {
+        let n = this.randomIntNumber();
+        if (n == 0)
+            return this.randomValue(this.professionJsonCommon);
+        else { 
+            if (gender == this.GENDER_MALE) 
+                return this.randomValue(this.professionJsonMale);
+            else
+                return this.randomValue(this.professionJsonFemale);
+        }
+    },
+
     getPerson: function () {
         this.person = {};
-        this.person.gender = this.randomGender();
-        this.person.firstName = this.randomFirstName(this.person.gender);
-        this.person.secondName = this.randomSecondName(this.person.gender);
-        this.person.surname = this.randomSurname(this.person.gender);
+        let gender = this.randomGender();
+        this.person.gender = gender;
+        this.person.firstName = this.randomFirstName(gender);
+        this.person.secondName = this.randomSecondName(gender);
+        this.person.surname = this.randomSurname(gender);
         this.person.birthYear = this.randomBirthYear();
+        this.person.birthMontDay = this.randomBirthMonthDay();
+        this.person.profession = this.randomProfession(gender);
         return this.person;
     }
 };
